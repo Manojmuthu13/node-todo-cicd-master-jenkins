@@ -14,12 +14,13 @@ pipeline {
         }
         stage('Push'){
             steps{
-                withCredentials([usernamePassword(credentialsId: 'manoj-dochub', passwordVariable: 'Manojkumar@', usernameVariable: 'manu-dockerhub')]) {
-        	     sh "docker login -u ${env.manu-dockerhub} -p ${env.Manojkumar@}"
+                withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+        	     sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
                  sh 'docker push manoj3214/node-todo-test:latest'
                 }
             }
         }
+
         stage('Deploy'){
             steps{
                 sh "docker-compose down && docker-compose up -d"
