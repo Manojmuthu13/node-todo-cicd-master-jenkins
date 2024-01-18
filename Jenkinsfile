@@ -15,7 +15,7 @@ pipeline {
         stage('Push'){
             steps{
                 withCredentials([usernamePassword(credentialsId: 'manoj-dochub', passwordVariable: 'Manojkumar@', usernameVariable: 'manu-dockerhub')]) {
-        	     sh "docker login -u manoj3214"
+        	     sh "docker login -u ${env.manu-dockerhub} -p ${env.Manojkumar@}"
                  sh 'docker push manoj3214/node-todo-test:latest'
                 }
             }
