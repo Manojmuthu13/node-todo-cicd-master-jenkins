@@ -1,11 +1,8 @@
 pipeline {
     agent any
-    tools{
-        maven "M2_HOME"
-    }
 
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('manu-dochub')
+        DOCKERHUB_CREDENTIALS = credentials('manoj-dochub')
         dockerHubUser='manoj3214'
         dockerHubPassword='Manoj321@'
     }
@@ -18,13 +15,13 @@ pipeline {
         }
         stage('Build and Test'){
             steps{
-                sh 'docker build -t manoj3214/vamika:latest .'
+                sh 'docker build -t manoj3214/virat:latest .'
             }
         }
         stage('Push'){
             steps{
                 sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-                 sh 'docker push manoj3214/vamika:latest'
+                 sh 'docker push manoj3214/virat:latest'
                 }
             }
         stage('Deploy'){
