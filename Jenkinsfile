@@ -1,29 +1,25 @@
 pipeline {
     agent any
-
-    environment {
-        DOCKERHUB_CREDENTIALS = credentials('manoj-dochub')
-        dockerHubUser='manoj3214'
-        dockerHubPassword='Manoj321@'
-    }
     
     stages{
         stage('Code'){
             steps{
-                git url: 'https://github.com/Manojmuthu13/node-todo-cicd-master-jenkins.git/', branch: 'master' 
+                git url: 'https://github.com/LondheShubham153/node-todo-cicd.git', branch: 'master' 
             }
         }
         stage('Build and Test'){
             steps{
-                sh 'docker build -t manoj3214/virat:latest .'
+                sh 'docker build . -t manoj3214/node-todo-test:latest'
             }
         }
         stage('Push'){
             steps{
-                sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-                 sh 'docker push manoj3214/virat:latest'
+                withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+        	     sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+                 sh 'docker push manoj3214/node-todo-test:latest'
                 }
             }
+        }
         stage('Deploy'){
             steps{
                 sh "docker-compose down && docker-compose up -d"
@@ -31,4 +27,3 @@ pipeline {
         }
     }
 }
-
