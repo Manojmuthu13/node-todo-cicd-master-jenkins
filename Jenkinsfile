@@ -5,7 +5,7 @@ pipeline {
     environment {
         DOCKERHUB_CREDENTIALS = credentials('manu-dockerhub')
         dockerHubUser='manoj3214'
-        dockerHubPassword='Manoj321@'
+        dockerHubPassword='dckr_pat_2yJjOGQQPCpRkXZEWm0Hrjjo8KU'
     }
     
     stages{
