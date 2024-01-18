@@ -4,7 +4,7 @@ pipeline {
     stages{
         stage('Code'){
             steps{
-                git url: 'https://github.com/Manojmuthu13/node-todo-cicd-master-jenkins.git', branch: 'master' 
+                git url: 'https://github.com/LondheShubham153/node-todo-cicd.git', branch: 'master' 
             }
         }
         stage('Build and Test'){
@@ -20,7 +20,6 @@ pipeline {
                 }
             }
         }
-
         stage('Deploy'){
             steps{
                 sh "docker-compose down && docker-compose up -d"
