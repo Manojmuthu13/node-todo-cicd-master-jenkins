@@ -1,5 +1,9 @@
 pipeline {
     agent any
+
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('manu-dochub')
+    }
     
     stages{
         stage('Code'){
@@ -12,10 +16,13 @@ pipeline {
                 sh 'docker build . -t manoj3214/node-todo-test:latest'
             }
         }
+        stage("login"){
+            steps{
+                sh 'echo $DOCKERHUB_CREDENTIAL_PSW | docker login -u $DOCKERHUB_CREDENTIAL_USR --pas
+            }
+        }
         stage('Push'){
             steps{
-                withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-        	     sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
                  sh 'docker push manoj3214/node-todo-test:latest'
                 }
             }
