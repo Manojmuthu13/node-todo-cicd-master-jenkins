@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Build and Test'){
             steps{
-                sh 'docker build . -t manoj3214/vamika:latest'
+                sh 'docker build -t manoj3214/vamika:latest .'
             }
         }
         stage('Push'){
