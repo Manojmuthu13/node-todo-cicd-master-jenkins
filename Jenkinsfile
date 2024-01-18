@@ -9,14 +9,14 @@ pipeline {
         }
         stage('Build and Test'){
             steps{
-                sh 'docker build . -t manoj3214/rehane:latest'
+                sh 'docker build . -t manoj3214/rohith:latest'
             }
         }
         stage('Push'){
             steps{
-               withCredentials([usernamePassword(credentialsId: 'manoj-dockerhub', passwordVariable: 'virat1234', usernameVariable: 'dockerhub')]) {
-        	     sh "docker login -u ${env.dockerhub} -p ${env.virat1234}"
-                 sh 'docker push manoj3214/rehane:latest'
+              withCredentials([usernamePassword(credentialsId: 'manoj-dockerhub', passwordVariable: 'Manoj321@', usernameVariable: 'manoj3214')]) {
+        	     sh "docker login -u ${env.manoj3214} -p ${env.Manoj321@}"
+                 sh 'docker push manoj3214/rohith:latest'
                 }
             }
         }
