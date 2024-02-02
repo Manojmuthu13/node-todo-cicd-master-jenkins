@@ -1,12 +1,12 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: app-v1
+  name: my-todolist
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: app-v1
+    name: my-todolist
   minReplicas: 1
   maxReplicas: 10
   metrics:
