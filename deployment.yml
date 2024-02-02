@@ -1,20 +1,34 @@
-kind: Deployment
 apiVersion: apps/v1
+kind: Deployment
 metadata:
-   name: to-do-list
+  name: my-app-deployment
 spec:
-   replicas: 2
-   selector:      # tells the controller which pods to watch/belong to
+  replicas: 1
+  selector:
     matchLabels:
-     app: to-do-list
-   template:
-      metadata:
-        labels:
-          app: to-do-list
-      spec:
-       containers:
-        - name: to-do-list
+      app: my-todolist
+  template:
+    metadata:
+      labels:
+        app: my-todolist
+    spec:
+      containers:
+        - name: my-todolist
           image: manoj3214/vamika
-          imagePullPolicy: Always
           ports:
-          - containerPort: 80
+            - containerPort: 3000  # Your Node.js application should listen on port 3000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-app-service
+spec:
+  selector:
+    app: my-todolist
+  ports:
+    - protocol: TCP
+      port: 80  # You can use port 80 here for HTTP traffic
+      targetPort: 3000  # This should match the port your Node.js application is running on (3000)
+  type: NodePort
