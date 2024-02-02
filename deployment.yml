@@ -1,0 +1,20 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+   name: to-do-list
+spec:
+   replicas: 2
+   selector:      # tells the controller which pods to watch/belong to
+    matchLabels:
+     app: to-do-list
+   template:
+      metadata:
+        labels:
+          app: to-do-list
+      spec:
+       containers:
+        - name: to-do-list
+          image: manoj3214/vamika
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 80
